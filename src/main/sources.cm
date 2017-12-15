@@ -9,5 +9,9 @@ Library
 is
 
   $/basis.cm
+  
+  (* use the system's SML/NJ compiler components *)
+  $smlnj/viscomp/basics.cm
+  $smlnj/viscomp/parser.cm
 
   main.sml
