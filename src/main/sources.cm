@@ -1,0 +1,13 @@
+(* sources.cm
+ *
+ *)
+
+Library
+
+  structure Main
+
+is
+
+  $/basis.cm
+
+  main.sml
