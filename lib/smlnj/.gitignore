@@ -1,3 +1,4 @@
 # ignore all, except this file
 *
 !.gitignore
+!get-sources.sh
