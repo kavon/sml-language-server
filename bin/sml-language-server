@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# super non-portable for now, until we can use install-sml-wrapper.sh.in instead.
+
+HEAP_IMAGE=/Users/kavon/side/sml-language-server/bin/.heap/sml-language-server.x86-darwin
+
+exec sml @SMLcmdname=$0 @SMLload=$HEAP_IMAGE $@

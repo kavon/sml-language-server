@@ -7,7 +7,7 @@ structure Main : sig
 end = struct
 
 
-    val main _ = (
+    fun main _ = (
         print "hello, world!\n" ;
         OS.Process.success)
 
