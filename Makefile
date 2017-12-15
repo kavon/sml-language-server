@@ -1,7 +1,7 @@
 
 
 # TODO: this suffix is out of our control, and needs to be detected.
-OS_SUFFIX="x86-darwin"
+OS_SUFFIX=x86-darwin
 
 ML_BUILD = ml-build
 ML_BUILD_FLAGS = 
@@ -28,4 +28,4 @@ clean:
 	rm -rf `find src -name ".cm" -type d`
 	rm -rf `find lib/smlnj -name ".cm" -type d`
 	rm -rf .cm
-	rm -f CLEAN_FILES
+	rm -f $(CLEAN_FILES)
