@@ -38,10 +38,10 @@ end = struct
         (* get the unchecked (concrete) ast *)
         val ast = SmlFile.parse source
     
+        (* setup an empty environment *)
         val loc = EnvRef.loc ()
         val base = EnvRef.base ()
         fun getenv () = Environment.layerEnv (#get loc (), #get base ())
-
         val {static=statenv, dynamic=NOTUSED, symbolic=symenv} = getenv ()
     in
         doElaborate {ast=ast, statenv=statenv, cinfo=cinfo}
