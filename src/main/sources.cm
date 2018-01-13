@@ -5,6 +5,7 @@
 Library
 
   structure Main
+  structure Server
 
 is
 
@@ -16,5 +17,10 @@ is
   $smlnj/viscomp/elabdata.cm
   $smlnj/viscomp/elaborate.cm
   $smlnj/viscomp/core.cm
+  
+  (* use sml-nj lib for json *)
+  $/json-lib.cm
 
+  (* source code *)
   main.sml
+  server.sml

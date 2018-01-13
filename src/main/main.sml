@@ -55,7 +55,12 @@ end = struct
             else (print "successfuly built AbSyn!\n" ; (absyn, nenv))
     end
 
-    fun main (_, argv) = (
-            List.app (fn s => (parseAndElab s ; ())) argv
-          ; OS.Process.success)
+    fun main (_, argv) = let
+        (* val _ = List.app (fn s => (parseAndElab s ; ())) argv *)
+        val sock = Server.start()
+        val _ = Server.send (sock, JSON.BOOL true)
+    in
+        OS.Process.success
+    end
+
 end
