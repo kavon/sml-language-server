@@ -1,15 +1,34 @@
 
 
 structure Responder : sig
-
-    type t
     
-    val new : Connection.socket -> t
+    val begin : Connection.socket -> unit
 
 end = struct 
 
-    type t = unit
 
-    fun new _ = raise Fail "todo"
+    fun handleReq (req, env) = 
+        (SOME(JSON.STRING "--> implement handler"), ())
 
+    fun mainLoop sock = let
+        fun nextRequest env = let
+            val req = Connection.recv sock
+            val (response, env') = handleReq (req, env)
+        in (
+            (* TODO: responses are always required. *)
+            (case response
+                of SOME msg => Connection.send (sock, msg)
+                 | NONE     => ()
+             (* end case *))
+             ;
+             nextRequest env'
+            )
+        end
+    in
+        nextRequest ()
+    end
+
+    fun begin sock = mainLoop sock
+    
+    
 end
