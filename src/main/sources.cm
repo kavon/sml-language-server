@@ -5,7 +5,8 @@
 Library
 
   structure Main
-  structure Server
+  structure Connection
+  structure Responder
 
 is
 
@@ -23,4 +24,5 @@ is
 
   (* source code *)
   main.sml
-  server.sml
+  connection.sml
+  responder.sml

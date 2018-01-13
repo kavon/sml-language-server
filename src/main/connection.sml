@@ -1,7 +1,7 @@
 
 (* current implementation uses blocking I/O, and stdin/stdout *)
 
-structure Server : sig
+structure Connection : sig
 
     type socket
 

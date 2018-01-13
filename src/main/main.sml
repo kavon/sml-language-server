@@ -57,8 +57,8 @@ end = struct
 
     fun main (_, argv) = let
         (* val _ = List.app (fn s => (parseAndElab s ; ())) argv *)
-        val sock = Server.start()
-        val _ = Server.send (sock, JSON.BOOL true)
+        val sock = Connection.start()
+        val _ = Connection.send (sock, JSON.BOOL true)
     in
         OS.Process.success
     end
