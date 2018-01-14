@@ -2,6 +2,9 @@
 
 # super non-portable for now, until we can use install-sml-wrapper.sh.in instead.
 
+# VSCode does not seem to carry the right PATH when executing this script.
+SML="/usr/local/smlnj/bin/sml"
+
 HEAP_IMAGE=`dirname $0`/.heap/sml-language-server.x86-darwin
 
 if [ ! -f $HEAP_IMAGE ]; then
@@ -9,4 +12,4 @@ if [ ! -f $HEAP_IMAGE ]; then
     exit 1
 fi
 
-exec sml @SMLcmdname=$0 @SMLload=$HEAP_IMAGE $@
+exec $SML @SMLcmdname=$0 @SMLload=$HEAP_IMAGE $@

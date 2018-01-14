@@ -57,8 +57,21 @@ end = struct
 
     fun main (_, argv) = let
         (* val _ = List.app (fn s => (parseAndElab s ; ())) argv *)
-        val sock = Connection.start()
-        val _ = Responder.begin sock
+        
+        (* val sock = Connection.start() *)
+        (* val _ = Responder.begin sock *)
+        
+        (* implement tee for testing purposes *)
+        val outS = TextIO.openOut "/Users/kavon/side/sml-language-server/input_dump.txt"
+        val inS = TextIO.stdIn
+        
+        fun copyByte (copt : char option) = (case copt
+            of SOME c => (TextIO.output1(outS, c) ; TextIO.flushOut outS ; copyByte (TextIO.input1 inS))
+             | NONE   => TextIO.closeOut outS
+            (* end case *))
+        
+        val _ = copyByte (TextIO.input1 inS)
+
     in
         OS.Process.success
     end
