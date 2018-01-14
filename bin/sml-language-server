@@ -4,4 +4,9 @@
 
 HEAP_IMAGE=`dirname $0`/.heap/sml-language-server.x86-darwin
 
+if [ ! -f $HEAP_IMAGE ]; then
+    echo "error: heap image is missing!"
+    exit 1
+fi
+
 exec sml @SMLcmdname=$0 @SMLload=$HEAP_IMAGE $@
