@@ -62,12 +62,12 @@ end = struct
         (* val _ = Responder.begin sock *)
         
         (* implement tee for testing purposes *)
-        val outS = TextIO.openOut "/Users/kavon/side/sml-language-server/input_dump.txt"
+        val _ = Logger.setEnabled true
         val inS = TextIO.stdIn
         
         fun copyByte (copt : char option) = (case copt
-            of SOME c => (TextIO.output1(outS, c) ; TextIO.flushOut outS ; copyByte (TextIO.input1 inS))
-             | NONE   => TextIO.closeOut outS
+            of SOME c => (Logger.out1 c ; copyByte (TextIO.input1 inS))
+             | NONE   => ()
             (* end case *))
         
         val _ = copyByte (TextIO.input1 inS)

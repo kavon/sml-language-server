@@ -2,7 +2,7 @@
 
 structure Responder : sig
     
-    val begin : Connection.socket -> unit
+    val begin : Connection.ty -> unit
 
 end = struct 
 

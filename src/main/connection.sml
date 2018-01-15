@@ -3,26 +3,18 @@
 
 structure Connection : sig
 
-    type socket
-
-    val start : unit -> socket
-    val stop : socket -> unit
+    type ty
     
-    val recv : socket -> JSON.value
-    val send : (socket * JSON.value) -> unit
+    datatype kind
+        = StdIO
+
+    val start : kind -> ty
+    val stop : ty -> unit
+    
+    val recv : ty -> JSON.value
+    val send : (ty * JSON.value) -> unit
 
 end = struct
-
-    (* TODO the transport layer, aka, unix sockets or
-       stdin/stdout is not defined by the LSP. Some IDEs
-       may use different transport systems. Thus, it is worth
-       abstracting this module into a functor so that it works
-       regardless of the transport layer.
-       
-       FWIW: most IDEs use stdin/stdout (Atom) or sockets.
-       
-       https://github.com/atom/atom-languageclient
-    *)
 
     (* TODO the protocol specifies that a header
        precedes the JSON object. we have to manually
@@ -42,16 +34,21 @@ end = struct
        In particular, StreamMessageConsumer and StreamMessageProducer.
        
         *)
+        
+    datatype kind 
+        = StdIO
 
-    datatype socket = 
-        S of { input : TextIO.instream ,
+    datatype ty = 
+        S of { kind : kind,
+               input : TextIO.instream ,
                output : TextIO.outstream }
             
     
-    fun start () = S { input = TextIO.stdIn ,
-                     output = TextIO.stdOut }
+    fun start (StdIO) = S { kind = StdIO ,
+                            input = TextIO.stdIn ,
+                            output = TextIO.stdOut }
                      
-    fun stop sock = ()  (* TODO close the real socket. *)
+    fun stop (S{kind=StdIO,...}) = () (* do nothing. *)
                      
     fun recv (S{input, ...}) = JSONParser.parse input
     
